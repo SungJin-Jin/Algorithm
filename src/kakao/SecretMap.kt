@@ -18,10 +18,10 @@ fun main(args: Array<String>) {
     require("[\"#####\", \"# # #\", \"### #\", \"#  ##\", \"#####\"]" == solve(5, arrayOf(9, 20, 28, 18, 11), arrayOf(30, 1, 21, 17, 28)))
 }
 
-fun solve(size: Int, firstMap: Array<Int>, secondMap: Array<Int>): String =
+private fun solve(size: Int, firstMap: Array<Int>, secondMap: Array<Int>): String =
         (0 until size).joinToString(prefix = "[", postfix = "]", separator = ", ") { createLine(size, firstMap[it] or secondMap[it]) }
 
-tailrec fun createLine(size: Int, value: Int, acc: String = ""): String = when (size) {
+private tailrec fun createLine(size: Int, value: Int, acc: String = ""): String = when (size) {
     0 -> "\"$acc\""
     else -> createLine(size - 1, value / 2, createPoint(value) + acc)
 }
