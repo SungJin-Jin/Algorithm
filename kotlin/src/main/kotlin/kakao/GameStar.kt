@@ -31,9 +31,11 @@
 
 fun main(args: Array<String>) {
 
+    require(36 == solve("1S2D*3T"))
     require(3 == solve("1D2S0T"))
     require(6 == solve("1D#2S*3S"))
     require(-4 == solve("1T2D3D#"))
+
 }
 
 private fun solve(input: String): Int {
@@ -53,7 +55,7 @@ private fun solve(input: String): Int {
         } catch(e: Exception) {
             1
         }
-        if(option != 1) index++
+        if (option != 1) index++
 
         result += Math.pow(score.toDouble(), bonus.toDouble()).toInt() * option
     }
