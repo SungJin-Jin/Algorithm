@@ -36,24 +36,22 @@ fun main(args: Array<String>) {
 }
 
 private fun solve(cacheSize: Int, values: List<String>): Int {
+    if (cacheSize == 0) return values.size * 5
+
     val caches = LinkedHashMap<String, String>()
 
     return values.map {
-        if (cacheSize == 0) {
-            5
+        val key = it.toUpperCase()
+
+        if (caches.containsKey(key)) {
+            1
         } else {
-            val key = it.toUpperCase()
-
-            if (caches.containsKey(key)) {
-                1
-            } else {
-                if (cacheSize == caches.size) {
-                    caches.remove(caches.keys.first())
-                }
-
-                caches.put(key, key)
-                5
+            if (cacheSize == caches.size) {
+                caches.remove(caches.keys.first())
             }
+
+            caches.put(key, key)
+            5
         }
     }.sum()
 
