@@ -23,15 +23,18 @@ package main.kotlin.codility
 
     coverage 100%
  */
+
 fun main(args: Array<String>) {
-    solution(6, 11, 2)
+
+    require(3 == solution(6, 11, 2))
+    require(1 == solution(10, 10, 5))
 }
 
-fun solution(start: Int, end: Int, divisor: Int) {
-    var value = (end - start) / divisor
+private fun solution(start: Int, end: Int, divisor: Int): Int {
+    val value = (end - start) / divisor
 
-    when {
-        start % divisor == 0 -> value++
+    return when {
+        start % divisor == 0 -> value.inc()
         else -> value
     }
 }
