@@ -1,29 +1,29 @@
-group 'com.spacecreate'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'kotlin-kapt'
-
-sourceCompatibility = 1.5
-
 buildscript {
-    ext.kotlin_version = '1.2.51'
     repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:1.2.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        jcenter()
     }
 }
 
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.51"
+}
+
+apply plugin: 'kotlin'
+
 repositories {
-    mavenCentral()
+    jcenter()
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+    compile "org.jetbrains.kotlin:kotlin-reflect:1.2.20"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+
 }
