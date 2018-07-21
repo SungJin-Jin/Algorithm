@@ -49,6 +49,7 @@ fun main(args: Array<String>) {
     require(listOf(2, 4, 1) == solution("CAGCCTA", arrayOf(2, 5, 0), arrayOf(4, 5, 6)))
 }
 
+// TODO : O(N + M) 시간복잡도 만족하게
 fun solution(input: String, startValues: Array<Int>, endValues: Array<Int>): List<Int?> {
     val inputToInt = input.toCharArray().map { charToInt(it) }
     return startValues.zip(endValues).map {
