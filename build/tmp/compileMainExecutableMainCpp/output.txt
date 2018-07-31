@@ -1,6 +1,0 @@
-See file:///home/paradox/Git/Algorithm/build/tmp/compileMainExecutableMainCpp/output.txt for all output for compileMainExecutableMainCpp.
-compiling min_avg_two_slice.cpp successful.
-
-compiling max_counters.cpp successful.
-
-Finished compileMainExecutableMainCpp, see full log file:///home/paradox/Git/Algorithm/build/tmp/compileMainExecutableMainCpp/output.txt.
