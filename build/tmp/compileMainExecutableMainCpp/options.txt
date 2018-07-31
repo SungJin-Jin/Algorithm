@@ -1,6 +1,0 @@
--x
-c++
--c
--I
-/home/paradox/Git/Algorithm/src/main/headers
--m64
