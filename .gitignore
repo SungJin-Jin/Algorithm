@@ -89,5 +89,19 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
+# Java class files
+*.class
 
-# End of https://www.gitignore.io/api/c,c++,gradle
+# Generated files
+bin/
+gen/
+out/
+release/
+lib/
+
+# Log Files
+*.log
+
+# Intellij
+*.iml
+.idea/
