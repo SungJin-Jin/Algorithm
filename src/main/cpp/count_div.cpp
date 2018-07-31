@@ -13,3 +13,7 @@ int solution(int A, int B, int K)
 	return count;
 }
 
+int main()
+{
+	return 0;
+}

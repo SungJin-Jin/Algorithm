@@ -1,0 +1,6 @@
+-o
+/home/paradox/Git/Algorithm/build/exe/main/main
+/home/paradox/Git/Algorithm/build/objs/main/mainCpp/bl7mr18xunlvv3a6upzg3ragt/max_counters.o
+/home/paradox/Git/Algorithm/build/objs/main/mainCpp/3mmmfjv7lbyx7cfqno6kvfum7/count_div.o
+/home/paradox/Git/Algorithm/build/objs/main/mainCpp/do25ziyvxa22nvsngqdj2qibc/min_avg_two_slice.o
+-m64
