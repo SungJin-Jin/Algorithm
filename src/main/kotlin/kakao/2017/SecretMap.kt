@@ -1,4 +1,4 @@
-/*
+package kakao.`2017`/*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 
   1. 비밀 지도(난이도: 하)

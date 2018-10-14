@@ -1,4 +1,4 @@
-/*
+package kakao.`2017`/*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 
   4. 셔틀 버스(난이도: 중)
