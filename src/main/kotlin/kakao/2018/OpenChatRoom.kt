@@ -30,6 +30,7 @@ package kakao.`2018`
     채팅방에 들어오고 나가거나, 닉네임을 변경한 기록이 담긴 문자열 배열 record가 매개변수로 주어질 때, 모든 기록이 처리된 후, 최종적으로 방을 개설한 사람이 보게 되는 메시지를 문자열 배열 형태로 return 하도록 solution 함수를 완성하라.
  */
 
+
 fun main(args: Array<String>) {
 
     require(
@@ -38,29 +39,30 @@ fun main(args: Array<String>) {
     )
 }
 
-private const val DELIMITER = " "
 private const val MAX_LENGTH = 3
+private const val DELIMITER = " "
+private const val SUFFIX_NAME = "님이"
 
-enum class Command { Enter, Leave, Change }
+enum class Command(val convert: String) {
+    Enter("들어왔습니다."),
+    Leave("나갔습니다."),
+    Change("")
+}
 
 fun solve(input: List<String>): List<String> {
     val userMap = input
-            .filter {
-                it.split(DELIMITER).size == MAX_LENGTH
-            }.map {
-                logLineToUser(it)
-            }.toMap()
+            .filter { isNotChangeCommand(it) }
+            .map { logLineToUser(it) }
+            .toMap()
 
-    return input.filter {
-        val command = it.split(DELIMITER)[0]
-        Command.valueOf(command) != Command.Change
-    }.map {
-        createLog(userMap, it)
-    }
+    return input.filter { Command.valueOf(it.split(DELIMITER)[0]) != Command.Change }
+            .map { createLog(userMap, it) }
 }
 
-fun logLineToUser(it: String): Pair<String, String> {
-    val split = it.split(DELIMITER)
+fun isNotChangeCommand(logLine: String) = logLine.split(DELIMITER).size == MAX_LENGTH
+
+fun logLineToUser(logLine: String): Pair<String, String> {
+    val split = logLine.split(DELIMITER)
     val uid = split[1]
     val nickname = split[2]
 
@@ -73,14 +75,6 @@ fun createLog(userMap: Map<String, String>, logLine: String): String {
     val uid = split[1]
     val nickname = userMap[uid]
 
-    return "${nickname}님이 ${convertCommand(Command.valueOf(command))}"
-}
-
-fun convertCommand(command: Command): String {
-    return when (command) {
-        Command.Enter -> "들어왔습니다."
-        Command.Leave -> "나갔습니다."
-        else -> ""
-    }
+    return "$nickname$SUFFIX_NAME ${Command.valueOf(command).convert}"
 }
 
