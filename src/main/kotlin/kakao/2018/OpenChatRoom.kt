@@ -39,27 +39,28 @@ fun main(args: Array<String>) {
     )
 }
 
-private const val MAX_LENGTH = 3
 private const val DELIMITER = " "
 private const val SUFFIX_NAME = "님이"
 
 enum class Command(val convert: String) {
     Enter("들어왔습니다."),
     Leave("나갔습니다."),
-    Change("")
+    Change("");
+
+    fun isValid(command: Command) = this.name == command.name
 }
 
 fun solve(input: List<String>): List<String> {
     val userMap = input
-            .filter { isNotChangeCommand(it) }
+            .filter { isNotContainsCommand(it, Command.Leave) }
             .map { logLineToUser(it) }
             .toMap()
 
-    return input.filter { Command.valueOf(it.split(DELIMITER)[0]) != Command.Change }
+    return input.filter { isNotContainsCommand(it, Command.Change) }
             .map { createLog(userMap, it) }
 }
 
-fun isNotChangeCommand(logLine: String) = logLine.split(DELIMITER).size == MAX_LENGTH
+fun isNotContainsCommand(logLine: String, command: Command) = !Command.valueOf(logLine.split(DELIMITER)[0]).isValid(command)
 
 fun logLineToUser(logLine: String): Pair<String, String> {
     val split = logLine.split(DELIMITER)
