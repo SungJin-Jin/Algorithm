@@ -1,7 +1,5 @@
 package kakao.`2017`
 
-import java.util.*
-
 /*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 

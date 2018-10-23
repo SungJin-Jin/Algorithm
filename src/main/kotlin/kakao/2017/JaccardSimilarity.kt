@@ -1,5 +1,5 @@
-package kakao.`2017`/*
-
+package kakao.`2017`
+/*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 
   5. 뉴스 클러스터링(난이도: 중)
