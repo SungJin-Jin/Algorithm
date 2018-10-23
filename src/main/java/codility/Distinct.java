@@ -1,8 +1,8 @@
-package main.java.codility;
+package codility;
 
 import java.util.Arrays;
 
-import static main.java.utils.Utils.require;
+import static utils.Utils.require;
 
 public class Distinct {
 

@@ -33,11 +33,13 @@ package kakao.`2017`/*
     입력으로 들어온 두 문자열의 자카드 유사도를 출력한다. 유사도 값은 0에서 1 사이의 실수이므로, 이를 다루기 쉽도록 65536을 곱한 후에 소수점 아래를 버리고 정수부만 출력한다.
  */
 
+private const val MAX_VALUE = 65536
+
 fun main(args: Array<String>) {
     require(16384 == solve("FRANCE", "french"))
-    require(65536 == solve("handshake", "shake hands"))
+    require(MAX_VALUE == solve("handshake", "shake hands"))
     require(43690 == solve("aa1+aa2", "AAAA12"))
-    require(65536 == solve("E=M*C^2", "e=m*c^2"))
+    require(MAX_VALUE == solve("E=M*C^2", "e=m*c^2"))
 }
 
 private fun solve(first: String, second: String): Int {
@@ -48,8 +50,8 @@ private fun solve(first: String, second: String): Int {
     val intersection = intersectionSize(firstUnits, secondUnits)
 
     return when (union) {
-        0 -> 65536
-        else -> 65536 * intersection / union
+        0 -> MAX_VALUE
+        else -> MAX_VALUE * intersection / union
     }
 }
 
@@ -66,10 +68,9 @@ private fun intersectionSize(first: List<String>, second: List<String>): Int = w
 private fun splitString(str: String): List<String> {
     return (0..str.length)
             .map { index ->
-                if (index < str.length - 1) {
-                    "${str[index]}${str[index + 1]}".toUpperCase()
-                } else {
-                    ""
+                when {
+                    index < str.length - 1 -> "${str[index]}${str[index + 1]}".toUpperCase()
+                    else -> ""
                 }
             }
             .filter { it.isNotEmpty() && it.contains(Regex("[a-zA-Z][a-zA-Z]")) }

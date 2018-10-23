@@ -1,3 +1,5 @@
+package sort
+
 fun main(args: Array<String>) {
     require(
             listOf(1, 2, 4, 5, 7, 10, 20, 40, 100) ==

@@ -1,6 +1,6 @@
-package main.java.codility;
+package codility;
 
-import static main.java.utils.Utils.require;
+import static utils.Utils.require;
 
 /*
     N 개의 정수로 구성된 비어 있지 않은 배열 A가 주어진다. 0 ≤ P <Q <N과 같은 한 쌍의 정수 (P, Q) 를 배열 A 의 조각 이라고 부릅니다 (슬라이스에 적어도 두 개의 요소가 있음을 알 수 있음). 평균 슬라이스 (P, Q)의이 A [P]의 합이다 + A [P + 1] + ... + 슬라이스의 길이에 의해 분할 된 A [Q]. 정확히 말하면 평균은 (A [P] + A [P + 1] + ... + A [Q]) / (Q-P + 1)과 같습니다.

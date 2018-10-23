@@ -1,4 +1,4 @@
-package main.kotlin.codility
+package codility
 
 fun main(args: Array<String>) {
 
