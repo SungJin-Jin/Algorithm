@@ -1,7 +1,7 @@
 package kakao.`2018`
 
 /*
-    1. 오픈 채팅방   
+    1. 오픈 채팅방
     카카오톡 오픈채팅방에서는 친구가 아닌 사람들과 대화를 할 수 있는데, 본래 닉네임이 아닌 가상의 닉네임을 사용하여 채팅방에 들어갈 수 있다.
 
     신입사원인 김크루는 카카오톡 오픈 채팅방을 개설한 사람을 위해, 다양한 사람들이 들어오고, 나가는 것을 지켜볼 수 있는 관리자창을 만들기로 했다. 채팅방에 누군가 들어오면 다음 메시지가 출력된다.
@@ -38,7 +38,49 @@ fun main(args: Array<String>) {
     )
 }
 
+private const val DELIMITER = " "
+private const val MAX_LENGTH = 3
+
+enum class Command { Enter, Leave, Change }
+
 fun solve(input: List<String>): List<String> {
-    return listOf()
+    val userMap = input
+            .filter {
+                it.split(DELIMITER).size == MAX_LENGTH
+            }.map {
+                logLineToUser(it)
+            }.toMap()
+
+    return input.filter {
+        val command = it.split(DELIMITER)[0]
+        Command.valueOf(command) != Command.Change
+    }.map {
+        createLog(userMap, it)
+    }
+}
+
+fun logLineToUser(it: String): Pair<String, String> {
+    val split = it.split(DELIMITER)
+    val uid = split[1]
+    val nickname = split[2]
+
+    return uid to nickname
+}
+
+fun createLog(userMap: Map<String, String>, logLine: String): String {
+    val split = logLine.split(DELIMITER)
+    val command = split[0]
+    val uid = split[1]
+    val nickname = userMap[uid]
+
+    return "${nickname}님이 ${convertCommand(Command.valueOf(command))}"
+}
+
+fun convertCommand(command: Command): String {
+    return when (command) {
+        Command.Enter -> "들어왔습니다."
+        Command.Leave -> "나갔습니다."
+        else -> ""
+    }
 }
 
