@@ -42,7 +42,7 @@ fun main(args: Array<String>) {
 private const val DELIMITER = " "
 private const val SUFFIX_NAME = "님이"
 
-enum class Command(val convert: String) {
+enum class Command(val message: String) {
     Enter("들어왔습니다."),
     Leave("나갔습니다."),
     Change("");
@@ -56,26 +56,27 @@ fun solve(input: List<String>): List<String> {
             .map { logLineToUser(it) }
             .toMap()
 
-    return input.filter { isNotContainsCommand(it, Command.Change) }
+    return input
+            .filter { isNotContainsCommand(it, Command.Change) }
             .map { createLog(userMap, it) }
 }
 
 fun isNotContainsCommand(logLine: String, command: Command) = !Command.valueOf(logLine.split(DELIMITER)[0]).isValid(command)
 
 fun logLineToUser(logLine: String): Pair<String, String> {
-    val split = logLine.split(DELIMITER)
-    val uid = split[1]
-    val nickname = split[2]
+    val log = logLine.split(DELIMITER)
+    val uid = log[1]
+    val nickname = log[2]
 
     return uid to nickname
 }
 
 fun createLog(userMap: Map<String, String>, logLine: String): String {
-    val split = logLine.split(DELIMITER)
-    val command = split[0]
-    val uid = split[1]
+    val log = logLine.split(DELIMITER)
+    val command = log[0]
+    val uid = log[1]
     val nickname = userMap[uid]
 
-    return "$nickname$SUFFIX_NAME ${Command.valueOf(command).convert}"
+    return "$nickname$SUFFIX_NAME ${Command.valueOf(command).message}"
 }
 
