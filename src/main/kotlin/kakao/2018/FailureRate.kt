@@ -26,13 +26,17 @@ fun main(args: Array<String>) {
     require(listOf(4, 1, 2, 3) == solve(4, listOf(4, 4, 4, 4, 4)))
 }
 
-fun solve(number: Int, input: List<Int>): List<Int> {
+fun solve(number: Int, stages: List<Int>): List<Int> {
     return (1..number)
             .map { stage ->
-                val fail = input.filter { stage == it }.size.toFloat()
-                val arrival = input.filter { stage <= it }.size.toFloat()
-                stage to fail / arrival
+                stage to failRate(stages, stage)
             }
             .sortedByDescending { it.second }
             .map { it.first }
+}
+
+fun failRate(stages: List<Int>, currentStage: Int): Float {
+    val fail = stages.filter { currentStage == it }.size
+    val arrival = stages.filter { currentStage <= it }.size
+    return fail / arrival.toFloat()
 }
