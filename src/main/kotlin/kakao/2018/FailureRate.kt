@@ -22,9 +22,17 @@ package kakao.`2018`
 
 fun main(args: Array<String>) {
 
-    require(listOf(3, 4, 2, 1, 5) == solve(listOf(2, 1, 2, 6, 2, 4, 3, 3)))
+    require(listOf(3, 4, 2, 1, 5) == solve(5, listOf(2, 1, 2, 6, 2, 4, 3, 3)))
+    require(listOf(4, 1, 2, 3) == solve(4, listOf(4, 4, 4, 4, 4)))
 }
 
-fun solve(input: List<Int>): List<Int> {
-    return listOf()
+fun solve(number: Int, input: List<Int>): List<Int> {
+    return (1..number)
+            .map { stage ->
+                val fail = input.filter { stage == it }.size.toFloat()
+                val arrival = input.filter { stage <= it }.size.toFloat()
+                stage to fail / arrival
+            }
+            .sortedByDescending { it.second }
+            .map { it.first }
 }

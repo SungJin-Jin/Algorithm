@@ -58,23 +58,23 @@ fun solve(input: List<String>): List<String> {
 
     return input
             .filter { isNotContainsCommand(it, Command.Change) }
-            .map { createLog(userMap, it) }
+            .map { createMessage(userMap, it) }
 }
 
-fun isNotContainsCommand(logLine: String, command: Command) = !Command.valueOf(logLine.split(DELIMITER)[0]).isValid(command)
+fun isNotContainsCommand(logLine: String, command: Command) = !Command.valueOf(logLine.split(DELIMITER).first()).isValid(command)
 
 fun logLineToUser(logLine: String): Pair<String, String> {
     val log = logLine.split(DELIMITER)
-    val uid = log[1]
-    val nickname = log[2]
+    val uid = log.component2()
+    val nickname = log.component3()
 
     return uid to nickname
 }
 
-fun createLog(userMap: Map<String, String>, logLine: String): String {
+fun createMessage(userMap: Map<String, String>, logLine: String): String {
     val log = logLine.split(DELIMITER)
-    val command = log[0]
-    val uid = log[1]
+    val command = log.component1()
+    val uid = log.component2()
     val nickname = userMap[uid]
 
     return "$nickname$SUFFIX_NAME ${Command.valueOf(command).message}"
