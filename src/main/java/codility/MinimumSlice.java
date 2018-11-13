@@ -57,7 +57,7 @@ public class MinimumSlice {
 
     private static int solve(int[] values) {
         int result = 0;
-        Double compareValue = Double.MAX_VALUE;
+        double compareValue = Double.MAX_VALUE;
         for (int index = 0; index < values.length - 1; index++) {
             double value = (values[index] + values[index + 1]) / 2.0;
 

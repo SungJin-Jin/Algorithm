@@ -28,9 +28,7 @@ fun main(args: Array<String>) {
 
 fun solve(number: Int, stages: List<Int>): List<Int> {
     return (1..number)
-            .map { stage ->
-                stage to failRate(stages, stage)
-            }
+            .map { stage -> stage to failRate(stages, stage) }
             .sortedByDescending { it.second }
             .map { it.first }
 }
@@ -38,5 +36,6 @@ fun solve(number: Int, stages: List<Int>): List<Int> {
 fun failRate(stages: List<Int>, currentStage: Int): Float {
     val fail = stages.filter { currentStage == it }.size
     val arrival = stages.filter { currentStage <= it }.size
+
     return fail / arrival.toFloat()
 }

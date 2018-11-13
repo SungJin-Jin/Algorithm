@@ -24,6 +24,9 @@ package kakao.`2017`
 
  */
 
+private const val HIT = 1
+private const val MISS = 5
+
 fun main(args: Array<String>) {
 
     require(50 == solve(3, listOf("Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA")))
@@ -36,7 +39,7 @@ fun main(args: Array<String>) {
 }
 
 private fun solve(cacheSize: Int, values: List<String>): Int {
-    if (cacheSize == 0) return values.size * 5
+    if (cacheSize == 0) return values.size * MISS
 
     val caches = LinkedHashMap<String, String>()
 
@@ -44,15 +47,15 @@ private fun solve(cacheSize: Int, values: List<String>): Int {
         val key = it.toUpperCase()
 
         if (caches.containsKey(key)) {
-            1
+            HIT
         } else {
-            if (cacheSize == caches.size) {
-                caches.remove(caches.keys.first())
-            }
+            if (isCacheFull(caches, cacheSize)) caches.remove(caches.keys.first())
 
-            caches.put(key, key)
-            5
+            caches[key] = key
+            MISS
         }
     }.sum()
 
 }
+
+fun isCacheFull(caches: LinkedHashMap<String, String>, cacheSize: Int) = cacheSize == caches.size

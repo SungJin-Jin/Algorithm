@@ -1,4 +1,5 @@
 package kakao.`2017`
+
 /*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 
@@ -26,6 +27,8 @@ package kakao.`2017`
  */
 
 
+private const val HOUR = 60
+
 fun main(args: Array<String>) {
 
     require("09:00" == solve(1, 1, 5, listOf("08:00", "08:01", "08:02", "08:03")))
@@ -33,14 +36,14 @@ fun main(args: Array<String>) {
     require("08:59" == solve(2, 1, 2, listOf("09:00", "09:00", "09:00", "09:00")))
     require("00:00" == solve(1, 1, 5, listOf("00:01", "00:01", "00:01", "00:01", "00:01")))
     require("09:00" == solve(1, 1, 1, listOf("23:59")))
-    require("18:00" == solve(10, 60, 45, listOf("23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59")))
+    require("18:00" == solve(10, HOUR, 45, listOf("23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59")))
 
 }
 
 fun solve(count: Int = 1, interval: Int = 1, max: Int = 1, timetable: List<String>): String {
-    val times = timetable.map { Time(it.substring(0, 2).toInt(), it.substring(3, 5).toInt()) }.toList()
-    val lastShuttle = 9 * 60 + (count - 1) * interval
-    val lastShuttleTime = Time(lastShuttle / 60, lastShuttle % 60)
+    val times = timetable.map { Time(it.substring(0, 2).toInt(), it.substring(3, 5).toInt()) }
+    val lastShuttle = 9 * HOUR + (count - 1) * interval
+    val lastShuttleTime = Time(lastShuttle / HOUR, lastShuttle % HOUR)
     val lastCrewTime = times.sortedBy { it.time() }.last()
 
     return when {
@@ -52,11 +55,8 @@ fun solve(count: Int = 1, interval: Int = 1, max: Int = 1, timetable: List<Strin
                 else -> time.minus(1).toString()
             }
         }
-        else -> when {
-            lastCrewTime.time() > lastShuttleTime.time() -> lastShuttleTime.toString()
-            lastCrewTime.time() == lastShuttleTime.time() -> lastShuttleTime.minus(1).toString()
-            else -> lastShuttleTime.toString()
-        }
+        lastCrewTime.time() == lastShuttleTime.time() -> lastShuttleTime.minus(1).toString()
+        else -> lastShuttleTime.toString()
     }
 }
 
@@ -65,12 +65,12 @@ data class Time(
         var minute: Int
 ) {
 
-    fun time() = hour * 60 + minute
+    fun time() = hour * HOUR + minute
 
     fun minus(value: Int): Time {
         if (minute == 0) {
             hour--
-            minute = 60 - value
+            minute = HOUR - value
         } else {
             minute -= value
         }

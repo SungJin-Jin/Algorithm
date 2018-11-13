@@ -1,4 +1,5 @@
 package kakao.`2017`
+
 /*
   문제 : http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 
@@ -67,12 +68,8 @@ private fun intersectionSize(first: List<String>, second: List<String>): Int = w
 
 private fun splitString(str: String): List<String> {
     return (0..str.length)
-            .map { index ->
-                when {
-                    index < str.length - 1 -> "${str[index]}${str[index + 1]}".toUpperCase()
-                    else -> ""
-                }
-            }
-            .filter { it.isNotEmpty() && it.contains(Regex("[a-zA-Z][a-zA-Z]")) }
+            .filter { it < str.length - 1 }
+            .map { "${str[it]}${str[it + 1]}".toUpperCase() }
+            .filter { it.contains(Regex("[a-zA-Z][a-zA-Z]")) }
             .toList()
 }

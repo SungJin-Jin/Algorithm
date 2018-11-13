@@ -1,6 +1,6 @@
 package codility;
 
-import java.util.Arrays;
+import java.util.HashSet;
 
 import static utils.Utils.require;
 
@@ -12,17 +12,10 @@ public class Distinct {
     }
 
     private static int solve(int[] values) {
-        if (values.length == 0) return 0;
+        HashSet<Integer> set = new HashSet<>();
 
-        final int[] result = {1};
-        Arrays.stream(values)
-                .sorted()
-                .reduce((left, right) -> {
-                    if (left != right) result[0] = result[0] + 1;
+        for (int value : values) set.add(value);
 
-                    return right;
-                });
-
-        return result[0];
+        return set.size();
     }
 }
